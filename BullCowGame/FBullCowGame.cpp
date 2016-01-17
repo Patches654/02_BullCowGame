@@ -12,9 +12,9 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 3;
-	const FString HIDDEN_WORD = "planet";
-
+	constexpr int32 MAX_TRIES{ 3 };
+	const FString HIDDEN_WORD = {"planet"};
+	
 	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
@@ -83,18 +83,16 @@ bool FBullCowGame::IsIsogram(FString Word) const
 	// sort the characters of the string. Speed O(n log n)
 	FString SortedWord = Word;
 	std::sort(SortedWord.begin(), SortedWord.end());
-
+	
 	// check for two neighbouring identical characters. Speed O(n)
-	char PreviousChar = SortedWord[0];
-	for (int CharNum = 1; CharNum < (int32)SortedWord.length(); CharNum++) {
+	char PreviousChar = {};
+	for each (char Character in SortedWord)
+	{
+		if (Character == PreviousChar)
 		{
-			char CurrentChar = SortedWord[CharNum];
-			if (CurrentChar == PreviousChar)
-			{
-				return false;
-			}
-			PreviousChar = CurrentChar;
+			return false;
 		}
+		PreviousChar = Character;
 	}
 	return true;
 }

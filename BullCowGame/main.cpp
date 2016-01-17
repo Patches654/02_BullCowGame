@@ -100,7 +100,7 @@ FText GetValidGuess()
 bool AskToPlayAgain()
 {
 	std::cout << "Do you want to play again with the same hidden word (y/n)? ";
-	FText Response = "";
+	FText Response = {};
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
