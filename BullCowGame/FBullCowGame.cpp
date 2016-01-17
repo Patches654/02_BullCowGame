@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "FBullCowGame.h"
 
 using int32 = int;
@@ -26,9 +27,9 @@ void FBullCowGame::Reset()
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	if (false) // if the guess isn't an isogram
+	if (!IsIsogram(Guess)) // if the guess isn't an isogram
 	{
-		return EGuessStatus::Not_Isogram; // TODO write function
+		return EGuessStatus::Not_Isogram;
 	}
 	else if (false) // if the guess isn't all lowercase
 	{
@@ -75,4 +76,25 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 		bGameIsWon = false;
 	}
 	return BullCowCount;
+}
+
+bool FBullCowGame::IsIsogram(FString Word) const
+{
+	// sort the characters of the string. Speed O(n log n)
+	FString SortedWord = Word;
+	std::sort(SortedWord.begin(), SortedWord.end());
+
+	// check for two neighbouring identical characters. Speed O(n)
+	char PreviousChar = SortedWord[0];
+	for (int CharNum = 1; CharNum < (int32)SortedWord.length(); CharNum++) {
+		{
+			char CurrentChar = SortedWord[CharNum];
+			if (CurrentChar == PreviousChar)
+			{
+				return false;
+			}
+			PreviousChar = CurrentChar;
+		}
+	}
+	return true;
 }
