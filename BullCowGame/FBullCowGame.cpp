@@ -1,8 +1,10 @@
+#pragma once
 #include "FBullCowGame.h"
 #include <map>
-#define TMap std::map
 
-using int32 = int;
+// to make syntax Unreal friendly
+#define TMap std::map
+using int32 = int; 
 
 FBullCowGame::FBullCowGame() { Reset(); }
 
@@ -13,8 +15,8 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 3;
-	const FString HIDDEN_WORD = "planet";
+	constexpr int32 MAX_TRIES = 6;
+	const FString HIDDEN_WORD = "mars";
 
 	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
@@ -22,9 +24,6 @@ void FBullCowGame::Reset()
 	bGameIsWon = false;
 	return;
 }
-
-
-
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
@@ -34,7 +33,7 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 	}
 	else if (!IsLowercase(Guess)) // if the guess isn't all lowercase
 	{
-		return EGuessStatus::Not_Lowercase; // TODO write function
+		return EGuessStatus::Not_Lowercase;
 	}
 	else if (Guess.length() != GetHiddenWordLength()) // if the guess length is wrong
 	{
@@ -85,7 +84,7 @@ bool FBullCowGame::IsIsogram(FString Word) const
 	if (Word.length() <= 1) { return true; }
 
 	TMap<char, bool> LetterSeen; // setup our map
-	for (auto Letter : Word) 	// for all letters of the word
+	for (auto Letter : Word)
 	{
 		Letter = tolower(Letter); // handle mixed case
 		if (LetterSeen[Letter]) {// if the letter is in the map

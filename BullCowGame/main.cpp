@@ -2,21 +2,23 @@
 This acts as the view in a MVC pattern, and is responsible for all
 user interaction. For game logic see the FBullCowGame class.
 */
-
+#pragma once
 #include <iostream>
 #include <string>	
 #include "FBullCowGame.h"
 
+// substitutions to make syntax Unreal friendly
 using FText = std::string;
 using int32 = int;
 
+// function prototypes as we're outside a class here
 void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
 void PrintGameSummary();
 
-FBullCowGame BCGame; // instantiate a new game
+FBullCowGame BCGame; // instantiate a new game which we re-use
 
 // the entry point for our application
 int main()
@@ -36,7 +38,14 @@ int main()
 // introduce the game
 void PrintIntro()
 {
-	std::cout << "\n\nWelcome to Bulls and Cows, a fun word game.\n";
+	std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+	std::cout << std::endl;
+	std::cout << "          }   {         ___ " << std::endl;
+	std::cout << "          (o o)        (o o) " << std::endl;
+	std::cout << "   /-------\\ /          \\ /-------\\ " << std::endl;
+	std::cout << "  / | BULL |O            O| COW  | \\ " << std::endl;
+	std::cout << " *  |-,--- |              |------|  * " << std::endl;
+	std::cout << "    ^      ^              ^      ^ " << std::endl;
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
 	std::cout << " letter isogram I'm thinking of?\n";
 	std::cout << std::endl;
@@ -113,6 +122,6 @@ void PrintGameSummary()
 	}
 	else
 	{
-		std::cout << "Better luck nect time!\n";
+		std::cout << "Better luck next time!\n";
 	}
 }
